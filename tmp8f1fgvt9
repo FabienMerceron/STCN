@@ -36,7 +36,7 @@ os.makedirs(out_path, exist_ok=True)
 torch.autograd.set_grad_enabled(False)
 
 # Setup Dataset, a small hack to use the image set in the 2017 folder because the 2016 one is of a different format
-test_dataset = DAVISTestDataset(davis_path, imset='2017/val.txt', single_object=True)
+test_dataset = DAVISTestDataset(davis_path, imset='/2016/val.txt', single_object=True)
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=4, pin_memory=True)
 
 # Load our checkpoint
