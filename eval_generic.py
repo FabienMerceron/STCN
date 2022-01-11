@@ -83,6 +83,7 @@ for k in list(prop_saved.keys()):
 prop_model.load_state_dict(prop_saved)
 
 # Start eval
+print("Begin progression")
 i=0
 for data in progressbar(test_loader, max_value=len(test_loader), redirect_stdout=True):
     print(i)
