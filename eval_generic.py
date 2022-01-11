@@ -82,6 +82,12 @@ for k in list(prop_saved.keys()):
             prop_saved[k] = torch.cat([prop_saved[k], pads], 1)
 prop_model.load_state_dict(prop_saved)
 
+
+#Test dataloader
+test_features, test_labels = next(iter(test_loader))
+print(f"Feature batch shape: {test_features.size()}")
+print(f"Labels batch shape: {test_labels.size()}")
+
 # Start eval
 print("Begin progression")
 i=0
