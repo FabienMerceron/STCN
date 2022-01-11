@@ -84,9 +84,9 @@ prop_model.load_state_dict(prop_saved)
 
 
 #Test dataloader
-test_features, test_labels = next(iter(test_loader))
+print(len(test_loader))
+test_features = next(iter(test_loader))
 print(f"Feature batch shape: {test_features.size()}")
-print(f"Labels batch shape: {test_labels.size()}")
 
 # Start eval
 print("Begin progression")
