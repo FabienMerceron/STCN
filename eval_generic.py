@@ -116,8 +116,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
         min_idx = 99999
         for i, frame_idx in enumerate(frames_with_gt):
             start = timeit.default_timer()
-            if i>10 :
-                break
+            
             print("passed through frame enumeration",i)
             min_idx = min(frame_idx, min_idx)
             # Note that there might be more than one label per frame
