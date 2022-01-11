@@ -12,8 +12,8 @@ from model.eval_network import STCN
 from dataset.davis_test_dataset import DAVISTestDataset
 from inference_core import InferenceCore
 
-from progressbar import progressbar
-
+#from progressbar import progressbar
+from tqdm import tqdm
 
 """
 Arguments loading
@@ -60,7 +60,8 @@ test_features = next(iter(test_loader))
 print(test_features[0])
 
 # Start eval
-for data in progressbar(test_loader, max_value=len(test_loader), redirect_stdout=True):
+#for data in progressbar(test_loader, max_value=len(test_loader), redirect_stdout=True):
+for data in tqdm(test_loader, max_value=len(test_loader)):
 
     with torch.cuda.amp.autocast(enabled=args.amp):
         rgb = data['rgb'].cuda()
