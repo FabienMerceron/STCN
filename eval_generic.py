@@ -93,6 +93,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
     
     with torch.cuda.amp.autocast(enabled=args.amp):
         rgb = data['rgb'].cuda()
+        print(rgb)
         msk = data['gt'][0].cuda()
         info = data['info']
         name = info['name'][0]
@@ -100,7 +101,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
         gt_obj = info['gt_obj']
         size = info['size']
         palette = data['palette'][0]
-
+        print(palette)
         print('Processing', name, '...')
 
         # Frames with labels, but they are not exhaustively labeled
