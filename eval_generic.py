@@ -28,6 +28,7 @@ Data format:
 
 
 import os
+import timeit
 from os import path
 from argparse import ArgumentParser
 
@@ -92,6 +93,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
     print("Begin progression")
     print(l)
     l+=1
+    
     with torch.cuda.amp.autocast(enabled=args.amp):
         rgb = data['rgb']
         msk = data['gt'][0]
@@ -113,6 +115,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
         # Propagating before there are labels is not useful
         min_idx = 99999
         for i, frame_idx in enumerate(frames_with_gt):
+            start = timeit.default_timer()
             if i>10 :
                 break
             print("passed through frame enumeration",i)
@@ -133,7 +136,10 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
                 processor.interact(with_bg_msk, frame_idx, rgb.shape[1], obj_idx)
             else:
                 processor.interact(with_bg_msk, frame_idx, frames_with_gt[i+1]+1, obj_idx)
-
+            
+            stop = timeit.default_timer()
+            time = stop - start
+            print(time)
         # Do unpad -> upsample to original size (we made it 480p)
         out_masks = torch.zeros((processor.t, 1, *size), dtype=torch.uint8, device='cuda')
 
