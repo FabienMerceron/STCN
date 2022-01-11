@@ -95,8 +95,8 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
     l+=1
     
     with torch.cuda.amp.autocast(enabled=args.amp):
-        rgb = data['rgb'].cuda()
-        msk = data['gt'][0].cuda()
+        rgb = data['rgb']
+        msk = data['gt'][0]
         info = data['info']
         name = info['name'][0]
         num_objects = len(info['labels'][0])
