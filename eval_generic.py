@@ -83,8 +83,10 @@ for k in list(prop_saved.keys()):
 prop_model.load_state_dict(prop_saved)
 
 # Start eval
+i=0
 for data in progressbar(test_loader, max_value=len(test_loader), redirect_stdout=True):
-
+    print(i)
+    i+=1
     with torch.cuda.amp.autocast(enabled=args.amp):
         rgb = data['rgb']
         msk = data['gt'][0]
