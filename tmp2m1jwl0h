@@ -113,7 +113,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
         # Propagating before there are labels is not useful
         min_idx = 99999
         for i, frame_idx in enumerate(frames_with_gt):
-            if i>10 :
+            if i>8 :
                 break
             print("passed through frame enumeration",i)
             min_idx = min(frame_idx, min_idx)
