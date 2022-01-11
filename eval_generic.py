@@ -88,11 +88,8 @@ prop_model.load_state_dict(prop_saved)
 
 # Start eval
 print("Begin progression")
-l=0
 for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr=True):
-    print("Begin progression")
-    print(l)
-    l+=1
+
     
     with torch.cuda.amp.autocast(enabled=args.amp):
         rgb = data['rgb'].cuda()
@@ -108,6 +105,7 @@ for data in progressbar(test_loader, max_value=len(test_loader), redirect_stderr
 
         # Frames with labels, but they are not exhaustively labeled
         frames_with_gt = sorted(list(gt_obj.keys()))
+        print('frames_with_gt',frames_with_gt)
         processor = InferenceCore(prop_model, rgb, num_objects=num_objects, top_k=top_k, 
                                     mem_every=args.mem_every, include_last=args.include_last)
 
